@@ -1,7 +1,7 @@
 import {
   computed, ref,
 } from '@nuxtjs/composition-api';
-//import { Logger } from '@vue-storefront/core';
+// import { Logger } from '@vue-storefront/core';
 import { useConfigStore } from '~/stores/config';
 import { UseConfig, UseConfigErrors } from './useConfig';
 import useApiClient from '~/composables/useApiClient';
@@ -18,11 +18,10 @@ const useConfig = (): UseConfig => {
     error.value.load = null;
     loading.value = true;
 
-    //Logger.debug('useConfig/load');
+    // Logger.debug('useConfig/load');
 
     try {
       const data = await request(storeConfigQuery);
-      console.log(data.storeConfig.store_code);
       configStore.$patch((state) => {
         state.storeConfig = data.storeConfig || {};
       });

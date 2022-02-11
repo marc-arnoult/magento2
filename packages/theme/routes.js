@@ -65,10 +65,10 @@ export function getRoutes(themeDir = __dirname) {
   //   alias: '/customer/account/createPassword',
   //   component: path.resolve(themeDir, 'pages/ResetPassword.vue'),
   // },
-  {
-    name: 'page',
-    path: '/:slug+',
-    component: path.resolve(themeDir, 'pages/Page.vue'),
-  },
+  //   {
+  //     name: 'page',
+  //     path: '/:slug+',
+  //     component: path.resolve(themeDir, 'pages/Page.vue'),
+  //   },
   ];
 }
