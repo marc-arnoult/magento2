@@ -1,56 +1,28 @@
 <template>
   <div>
-    <LazyHydrate when-visible>
-      <CartSidebar />
-    </LazyHydrate>
-    <LazyHydrate when-visible>
-      <WishlistSidebar />
-    </LazyHydrate>
-    <LazyHydrate when-visible>
-      <LoginModal />
-    </LazyHydrate>
-    <LazyHydrate when-visible>
-      <Notification />
-    </LazyHydrate>
-<!--    <TopBar class="desktop-only" />-->
-    <AppHeader />
     <div id="layout">
       <nuxt :key="route.fullPath" />
     </div>
-    <BottomNavigation />
-    <AppFooter />
   </div>
 </template>
 <script>
-import LazyHydrate from 'vue-lazy-hydration';
 import { useRoute, defineComponent, useFetch } from '@nuxtjs/composition-api';
-//import { useMagentoConfiguration } from '~/composables/useMagentoConfiguration';
-import AppHeader from '~/components/AppHeader.vue';
-import TopBar from '~/components/TopBar.vue';
-import BottomNavigation from '~/components/BottomNavigation.vue';
+import useMagentoConfiguration from '~/composables/useMagentoConfiguration';
 
 export default defineComponent({
   name: 'DefaultLayout',
 
-  components: {
-    LazyHydrate,
-    AppHeader,
-   // TopBar,
-    BottomNavigation,
-    AppFooter: () => import(/* webpackPrefetch: true */ '~/components/AppFooter.vue'),
-    CartSidebar: () => import(/* webpackPrefetch: true */ '~/components/CartSidebar.vue'),
-    WishlistSidebar: () => import(/* webpackPrefetch: true */ '~/components/WishlistSidebar.vue'),
-    LoginModal: () => import(/* webpackPrefetch: true */ '~/components/LoginModal.vue'),
-    Notification: () => import(/* webpackPrefetch: true */ '~/components/Notification'),
-  },
+  // components {
+  //   AppFooter: () => import(/* webpackPrefetch: true */ '~/components/AppFooter.vue'),
+  // }
 
   setup() {
     const route = useRoute();
-    // const { loadConfiguration } = useMagentoConfiguration();
-    //
-    // useFetch(async () => {
-    //   await loadConfiguration();
-    // });
+    const { loadConfiguration } = useMagentoConfiguration();
+
+    useFetch(async () => {
+      await loadConfiguration();
+    });
 
     return {
       route,

@@ -1,12 +1,13 @@
-import { Context, Logger } from '@vue-storefront/core';
+import cmsPageQuery from '~/api/cmsPage';
+import useApiClient from '~/composables/usuApiClinet';
 
 export const loadContentCommand = {
-  execute: async (context: Context, params) => {
-    Logger.debug('[Magento]: Load CMS Page content', { params });
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const { data } = await context.$magento.api.cmsPage(params.identifier);
+  execute: async ({ identifier }) => {
+    const { query } = useApiClient();
 
-    Logger.debug('[Result]:', { data });
+    const data = await query(cmsPageQuery, {
+      identifier,
+    });
 
     return data.cmsPage;
   },

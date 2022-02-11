@@ -16,12 +16,10 @@ import {
   SfHeading,
 } from '@storefront-ui/vue';
 import {
-  computed,
-  defineComponent, onMounted, useAsync, useContext, useRoute,
+  defineComponent, useAsync, useContext, useRoute,
 } from '@nuxtjs/composition-api';
-import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 import HTMLContent from '~/components/HTMLContent';
-import { useContent } from '~/composables';
+import useContent from '~/composables/useContent';
 
 export default defineComponent({
   components: {
@@ -35,7 +33,6 @@ export default defineComponent({
     },
   },
   setup() {
-    const { addTags } = useCache();
     const { error: nuxtError } = useContext();
     const route = useRoute();
     const { params } = route.value;
@@ -49,8 +46,6 @@ export default defineComponent({
       if (!result) {
         nuxtError({ statusCode: 404 });
       }
-
-      addTags([{ prefix: CacheTagPrefix.View, value: result.identifier }]);
 
       return result;
     });

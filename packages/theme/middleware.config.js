@@ -1,5 +1,5 @@
 const config = require('./config.js');
-const cookieNames = require('./enums/cookieNameEnum');
+const cookieNames = require('./_old/enums/cookieNameEnum');
 
 module.exports = {
   integrations: {

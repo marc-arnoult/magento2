@@ -59,35 +59,35 @@ export default () => {
       '@nuxtjs/google-fonts',
       '@nuxtjs/pwa',
       '@nuxtjs/style-resources',
-      ['@vue-storefront/nuxt', {
-        // @core-development-only-start
-        coreDevelopment: true,
-        logger: {
-          verbosity: 'debug',
-        },
-        // @core-development-only-end
-        useRawSource: {
-          dev: [
-            '@vue-storefront/magento',
-            '@vue-storefront/core',
-          ],
-          prod: [
-            '@vue-storefront/magento',
-            '@vue-storefront/core',
-          ],
-        },
-      }],
-      ['@vue-storefront/magento/nuxt', {
-        i18n: {
-          useNuxtI18nConfig: true,
-        },
-        cookies,
-        externalCheckout,
-        defaultStore,
-        facets,
-        magentoBaseUrl,
-        imageProvider,
-      }],
+      // ['@vue-storefront/nuxt', {
+      //   // @core-development-only-start
+      //   coreDevelopment: true,
+      //   logger: {
+      //     verbosity: 'debug',
+      //   },
+      //   // @core-development-only-end
+      //   useRawSource: {
+      //     dev: [
+      //      // '@vue-storefront/magento',
+      //       '@vue-storefront/core',
+      //     ],
+      //     prod: [
+      //      // '@vue-storefront/magento',
+      //       '@vue-storefront/core',
+      //     ],
+      //   },
+      // }],
+      // ['@vue-storefront/magento/nuxt', {
+      //   i18n: {
+      //     useNuxtI18nConfig: true,
+      //   },
+      //   cookies,
+      //   externalCheckout,
+      //   defaultStore,
+      //   facets,
+      //   magentoBaseUrl,
+      //   imageProvider,
+      // }],
       '@nuxt/image',
       '@pinia/nuxt',
     ],
@@ -97,17 +97,17 @@ export default () => {
       }],
       'cookie-universal-nuxt',
       'vue-scrollto/nuxt',
-      '@vue-storefront/middleware/nuxt',
+     // '@vue-storefront/middleware/nuxt',
       '@nuxt/image',
-      ['@vue-storefront/cache/nuxt', {
-        enabled: false,
-        invalidation: {
-          handlers: [
-            '@vue-storefront/cache/defaultHandler',
-          ],
-        },
-        driver: [],
-      }],
+      // ['@vue-storefront/cache/nuxt', {
+      //   enabled: false,
+      //   invalidation: {
+      //     handlers: [
+      //       '@vue-storefront/cache/defaultHandler',
+      //     ],
+      //   },
+      //   driver: [],
+      // }],
     ],
     i18n: {
       country: 'US',
@@ -200,14 +200,14 @@ export default () => {
       },
     },
     plugins: [
-      '~/plugins/token-expired',
-      '~/plugins/i18n',
-      '~/plugins/fcPlugin',
-      '~/plugins/dompurify',
+      // '~/plugins/token-expired',
+      // '~/plugins/i18n',
+      // '~/plugins/fcPlugin',
+     '~/plugins/dompurify',
     ],
-    serverMiddleware: [
-      '~/serverMiddleware/body-parser.js',
-    ],
+    // serverMiddleware: [
+    //   '~/serverMiddleware/body-parser.js',
+    // ],
     router: {
       extendRoutes(routes) {
         getRoutes()
