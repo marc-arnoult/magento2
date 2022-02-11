@@ -185,6 +185,7 @@ export default () => {
       },
       transpile: [
         'vee-validate/dist/rules',
+        /^@storefront-ui/
       ],
       plugins: [
         new webpack.DefinePlugin({
