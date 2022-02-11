@@ -1,11 +1,11 @@
 import cmsPageQuery from '~/api/cmsPage';
-import useApiClient from '~/composables/usuApiClinet';
+import useApiClient from '~/composables/useApiClient';
 
 export const loadContentCommand = {
   execute: async ({ identifier }) => {
-    const { query } = useApiClient();
+    const { request } = useApiClient();
 
-    const data = await query(cmsPageQuery, {
+    const data = await request(cmsPageQuery, {
       identifier,
     });
 

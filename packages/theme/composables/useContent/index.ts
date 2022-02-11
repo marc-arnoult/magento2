@@ -1,5 +1,6 @@
 import { ref, Ref } from '@nuxtjs/composition-api';
 import { UseContentInterface, UseContentErrors } from './useContent';
+import { loadContentCommand } from './commands/loadContentCommand';
 
 export const useContent = () => {
   const loading: Ref<boolean> = ref(false);
@@ -9,13 +10,12 @@ export const useContent = () => {
   });
 
   const loadPage = async (params) => {
-   // Logger.debug('useContent/loadPage');
+    // Logger.debug('useContent/loadPage');
     loading.value = true;
     let result = null;
 
     try {
       error.value.page = null;
-      const { loadContentCommand } = await import('./commands/loadContentCommand');
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       result = await loadContentCommand.execute(params);
     } catch (err) {
@@ -47,7 +47,7 @@ export const useContent = () => {
 
   return {
     loadPage,
-    //loadBlocks,
+    // loadBlocks,
     loading,
     error,
   };

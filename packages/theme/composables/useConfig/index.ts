@@ -4,11 +4,11 @@ import {
 //import { Logger } from '@vue-storefront/core';
 import { useConfigStore } from '~/stores/config';
 import { UseConfig, UseConfigErrors } from './useConfig';
-import useApiClient from '~/composables/usuApiClinet';
+import useApiClient from '~/composables/useApiClient';
 import storeConfigQuery from '~/api/storeConfig';
 
 const useConfig = (): UseConfig => {
-  const { query } = useApiClient();
+  const { request } = useApiClient();
   const loading = ref(false);
   const error = ref<UseConfigErrors>({ load: null });
   const configStore = useConfigStore();
@@ -21,8 +21,8 @@ const useConfig = (): UseConfig => {
     //Logger.debug('useConfig/load');
 
     try {
-      const data = await query(storeConfigQuery);
-     // console.log(data);
+      const data = await request(storeConfigQuery);
+      console.log(data.storeConfig.store_code);
       configStore.$patch((state) => {
         state.storeConfig = data.storeConfig || {};
       });
