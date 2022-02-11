@@ -1,21 +1,23 @@
 <template>
   <div>
+    <AppHeader />
     <div id="layout">
       <nuxt :key="route.fullPath" />
     </div>
+    <AppFooter />
   </div>
 </template>
 <script>
 import { useRoute, defineComponent, useFetch } from '@nuxtjs/composition-api';
 import useMagentoConfiguration from '~/composables/useMagentoConfiguration';
+import AppHeader from '~/components/AppHeader';
 
 export default defineComponent({
   name: 'DefaultLayout',
-
-  // components {
-  //   AppFooter: () => import(/* webpackPrefetch: true */ '~/components/AppFooter.vue'),
-  // }
-
+  components: {
+    AppHeader,
+    AppFooter: () => import(/* webpackPrefetch: true */ '~/components/AppFooter.vue'),
+  },
   setup() {
     const route = useRoute();
     const { loadConfiguration } = useMagentoConfiguration();
