@@ -58,7 +58,7 @@
           v-for="item in social"
           :key="item"
           class="footer__social-image"
-          :src="addBasePath('/icons/'+item+'.svg')"
+          :src="'/icons/'+item+'.svg'"
           :alt="item"
           width="32"
           height="32"
@@ -72,7 +72,6 @@
 import {
   SfFooter, SfList, SfImage, SfMenuItem,
 } from '@storefront-ui/vue';
-import { addBasePath } from '@vue-storefront/core';
 
 export default {
   components: {
@@ -80,11 +79,6 @@ export default {
     SfList,
     SfImage,
     SfMenuItem,
-  },
-  setup() {
-    return {
-      addBasePath,
-    };
   },
   data() {
     return {
