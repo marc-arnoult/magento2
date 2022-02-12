@@ -13,11 +13,13 @@ import useUser from '~/composables/useUser';
 
 export default defineComponent({
   setup() {
-    const { login, user } = useUser();
-    useFetch(() => login({
+    const { register, user } = useUser();
+    useFetch(() => register({
       user: {
-        email: 'bherba+1@vuestorefront.io',
+        email: 'marcin.kwiatkowski+55@vuestorefront.io',
         password: 'Admin123!',
+        firstname: 'Marcin',
+        lastname: 'Kwiatkowski'
       },
     }));
 

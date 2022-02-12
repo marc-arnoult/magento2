@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request';
 
 export default gql`
-  mutation updateCustomer($input: CustomerUpdateInput!) {
-    updateCustomerV2(input: $input) {
+  mutation createCustomer($input: CustomerCreateInput!) {
+    createCustomerV2(input: $input) {
       customer {
         date_of_birth
         default_billing

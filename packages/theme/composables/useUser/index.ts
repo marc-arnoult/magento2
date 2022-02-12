@@ -12,6 +12,7 @@ import customerQuery from '~/api/customer';
 import customerCartQuery from '~/api/customerCart';
 import mergeCartsQuery from '~/api/mergeCarts';
 import generateCustomerTokenQuery from '~/api/generateCustomerToken';
+import createCustomerMutation from '~/api/createCustomer';
 import cookieNames from '~/enums/cookieNameEnum';
 
 export const useUser = (): UseUser => {
@@ -132,6 +133,7 @@ export const useUser = (): UseUser => {
     try {
       loading.value = true;
 
+      console.log(user);
       const data = await request(
         generateCustomerTokenQuery,
         {
@@ -154,8 +156,6 @@ export const useUser = (): UseUser => {
       const currentCartId = app.$cookies.get(cookieNames.cartCookieName);
       const cart = await request(customerCartQuery);
       const newCartId = cart.customerCart.id;
-      console.log(newCartId, currentCartId)
-      console.log(cart.customerCart)
       if (newCartId && currentCartId && currentCartId !== newCartId) {
         const dataMergeCart = await request(
           mergeCartsQuery,
@@ -179,7 +179,7 @@ export const useUser = (): UseUser => {
       return customerStore.user;
     } catch (err) {
       error.value.login = err;
-      console.log('error', err)
+      console.log('error', err);
       // Logger.error('useUser/login', err);
     } finally {
       loading.value = false;
@@ -190,56 +190,62 @@ export const useUser = (): UseUser => {
 
   // eslint-disable-next-line consistent-return
   const register = async ({ user: providedUser, customQuery }) => {
-    // // Logger.debug('[Magento] useUser.register', providedUser);
-    // resetErrorValue();
-    //
-    // try {
-    //   loading.value = true;
-    //
-    //   const {
-    //     email,
-    //     password,
-    //     recaptchaToken,
-    //     ...baseData
-    //   } = generateUserData(providedUser);
-    //
-    //   const { data, errors } = await app.context.$vsf.$magento.api.createCustomer(
-    //     {
-    //       email,
-    //       password,
-    //       recaptchaToken,
-    //       ...baseData,
-    //     },
-    //     customQuery || {},
-    //   );
-    //
-    //   // Logger.debug('[Result]:', { data });
-    //
-    //   if (errors) {
-    //     // Logger.error(errors.map((e) => e.message).join(','));
-    //   }
-    //
-    //   if (!data || !data.createCustomerV2 || !data.createCustomerV2.customer) {
-    //     // Logger.error('Customer registration error'); // todo: handle errors in better way
-    //   }
-    //
-    //   // if (recaptchaToken) { // todo: move recaptcha to separate module
-    //   //   // generate a new token for the login action
-    //   //   const { recaptchaInstance } = params;
-    //   //   const newRecaptchaToken = await recaptchaInstance.getResponse();
-    //   //
-    //   //   return factoryParams.logIn(context, { username: email, password, recaptchaToken: newRecaptchaToken });
-    //   // }
-    //   error.value.register = null;
-    //   customerStore.user = login({ user: { username: email, password }, customQuery: {} });
-    //
-    //   return customerStore.user;
-    // } catch (err) {
-    //   error.value.register = err;
-    //   // Logger.error('useUser/register', err);
-    // } finally {
-    //   loading.value = false;
-    // }
+    // Logger.debug('[Magento] useUser.register', providedUser);
+    resetErrorValue();
+
+    try {
+      loading.value = true;
+
+      const {
+        email,
+        password,
+        recaptchaToken,
+        ...baseData
+      } = generateUserData(providedUser);
+
+      console.log(email, password)
+
+      const data = await request(
+        createCustomerMutation,
+        {
+          input: {
+            email,
+            password,
+            recaptchaToken,
+            ...baseData,
+          },
+        },
+      );
+
+      // Logger.debug('[Result]:', { data });
+
+      // if (errors) {
+      //   // Logger.error(errors.map((e) => e.message).join(','));
+      // }
+
+      if (!data || !data.createCustomerV2 || !data.createCustomerV2.customer) {
+        // Logger.error('Customer registration error'); // todo: handle errors in better way
+      }
+
+      // if (recaptchaToken) { // todo: move recaptcha to separate module
+      //   // generate a new token for the login action
+      //   const { recaptchaInstance } = params;
+      //   const newRecaptchaToken = await recaptchaInstance.getResponse();
+      //
+      //   return factoryParams.logIn(context, { username: email, password, recaptchaToken: newRecaptchaToken });
+      // }
+      error.value.register = null;
+      console.log(data, email, password)
+      customerStore.user = await login({ user: { email, password }});
+
+      return customerStore.user;
+    } catch (err) {
+      error.value.register = err;
+      // Logger.error('useUser/register', err);
+      console.log('register error', err)
+    } finally {
+      loading.value = false;
+    }
   };
 
   // eslint-disable-next-line consistent-return
