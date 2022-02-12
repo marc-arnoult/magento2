@@ -152,10 +152,10 @@ export const useUser = (): UseUser => {
       // merge existing cart with customer cart
       // todo: move this logic to separate method
       const currentCartId = app.$cookies.get(cookieNames.cartCookieName);
-
       const cart = await request(customerCartQuery);
-      const newCartId = cart.data.customerCart.id;
-
+      const newCartId = cart.customerCart.id;
+      console.log(newCartId, currentCartId)
+      console.log(cart.customerCart)
       if (newCartId && currentCartId && currentCartId !== newCartId) {
         const dataMergeCart = await request(
           mergeCartsQuery,
@@ -170,13 +170,16 @@ export const useUser = (): UseUser => {
         app.$cookies.set(cookieNames.cartCookieName, dataMergeCart.mergeCarts.id);
       } else {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        app.$cookies.set(cookieNames.cartCookieName, cart.data.customerCart);
+        app.$cookies.set(cookieNames.cartCookieName, cart.customerCart.id);
       }
 
       error.value.login = null;
-      customerStore.user = load();
+      customerStore.user = await load();
+
+      return customerStore.user;
     } catch (err) {
       error.value.login = err;
+      console.log('error', err)
       // Logger.error('useUser/login', err);
     } finally {
       loading.value = false;

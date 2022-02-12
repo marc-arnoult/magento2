@@ -1,20 +1,20 @@
 <template>
   <div>
     <h1>TEST PAGE</h1>
-    Customer: {{ customer }}
+    Customer: {{ user }}
   </div>
 </template>
 
 <script>
 import {
-  defineComponent, useAsync,
+  defineComponent, useFetch,
 } from '@nuxtjs/composition-api';
 import useUser from '~/composables/useUser';
 
 export default defineComponent({
   setup() {
-    const { login } = useUser();
-    const customer = useAsync(() => login({
+    const { login, user } = useUser();
+    useFetch(() => login({
       user: {
         email: 'bherba+1@vuestorefront.io',
         password: 'Admin123!',
@@ -22,7 +22,7 @@ export default defineComponent({
     }));
 
     return {
-      customer,
+      user,
     };
   },
 });

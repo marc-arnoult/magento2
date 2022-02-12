@@ -4,13 +4,23 @@ import cookieNames from '~/enums/cookieNameEnum';
 
 export const useApiClient = () => {
   const { app } = useContext();
-  const defaultHeaders = {
+  const customerToken = app.$cookies.get(cookieNames.customerCookieName);
+  let defaultHeaders = {
     store: app.$cookies.get(cookieNames.storeCookieName),
-    //authorization: `Bearer ${app.$cookies.get(cookieNames.customerCookieName)}`,
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+    'Content-Type': `application/json`,
+    'Accept'      : `application/json`,
+    authorization: undefined
   };
 
+  if (customerToken) {
+    defaultHeaders.authorization = `Bearer ${customerToken}`;
+  }
+
+
   // eslint-disable-next-line @typescript-eslint/no-shadow,@typescript-eslint/no-unsafe-argument
-  const request = (document, variables = null, requestHeaders = defaultHeaders) => client.request(document, variables, requestHeaders);
+  const request = (document, variables = null, requestHeaders = defaultHeaders) => client.request(document, variables, requestHeaders, );
 
   return {
     request,
