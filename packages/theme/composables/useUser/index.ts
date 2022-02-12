@@ -13,6 +13,7 @@ import customerCartQuery from '~/api/customerCart';
 import mergeCartsQuery from '~/api/mergeCarts';
 import generateCustomerTokenQuery from '~/api/generateCustomerToken';
 import createCustomerMutation from '~/api/createCustomer';
+import changeCustomerPasswordMutation from "~/api/changeCustomerPassword";
 import cookieNames from '~/enums/cookieNameEnum';
 
 export const useUser = (): UseUser => {
@@ -250,33 +251,34 @@ export const useUser = (): UseUser => {
 
   // eslint-disable-next-line consistent-return
   const changePassword = async (params) => {
-    // // Logger.debug('[Magento] useUser.changePassword', { currentPassword: mask(params.current), newPassword: mask(params.new) });
-    // resetErrorValue();
-    //
-    // try {
-    //   loading.value = true;
-    //
-    //   const { data, errors } = await app.context.$vsf.$magento.api.changeCustomerPassword({
-    //     currentUser: customerStore.user,
-    //     currentPassword: params.current,
-    //     newPassword: params.new,
-    //     customQuery: params.customQuery,
-    //   });
-    //
-    //   if (errors) {
-    //     // Logger.error(errors.map((e) => e.message).join(','));
-    //   }
-    //
-    //   // Logger.debug('[Result] ', { data });
-    //
-    //   customerStore.user = data?.changeCustomerPassword;
-    //   error.value.changePassword = null;
-    // } catch (err) {
-    //   error.value.changePassword = err;
-    //   // Logger.error('useUser/changePassword', err);
-    // } finally {
-    //   loading.value = false;
-    // }
+    // Logger.debug('[Magento] useUser.changePassword', { currentPassword: mask(params.current), newPassword: mask(params.new) });
+    resetErrorValue();
+
+    try {
+      loading.value = true;
+
+      const data = await request(changeCustomerPasswordMutation, {
+        currentUser: customerStore.user,
+        currentPassword: params.current,
+        newPassword: params.new,
+        customQuery: params.customQuery,
+      });
+
+      // if (errors) {
+      //   // Logger.error(errors.map((e) => e.message).join(','));
+      // }
+
+      // Logger.debug('[Result] ', { data });
+
+      customerStore.user = data?.changeCustomerPassword;
+      error.value.changePassword = null;
+    } catch (err) {
+      error.value.changePassword = err;
+      // Logger.error('useUser/changePassword', err);
+      console.log('error', err)
+    } finally {
+      loading.value = false;
+    }
   };
 
   return {
