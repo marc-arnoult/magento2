@@ -1,5 +1,9 @@
 <template>
   <div>
+    <TopBar
+      v-if="!isMobile"
+      class="desktop-only"
+    />
     <AppHeader />
     <div id="layout">
       <nuxt :key="route.fullPath" />
@@ -8,13 +12,20 @@
   </div>
 </template>
 <script>
-import { useRoute, defineComponent, useFetch } from '@nuxtjs/composition-api';
+import {
+  useRoute, defineComponent, useFetch, computed, onBeforeUnmount
+} from '@nuxtjs/composition-api';
+import {
+  mapMobileObserver,
+  unMapMobileObserver,
+} from '@storefront-ui/vue/src/utilities/mobile-observer.js';
 import useMagentoConfiguration from '~/composables/useMagentoConfiguration';
 import AppHeader from '~/components/AppHeader';
 
 export default defineComponent({
   name: 'DefaultLayout',
   components: {
+    TopBar: () => import(/* webpackPrefetch: true */ '~/components/TopBar.vue'),
     AppHeader,
     AppFooter: () => import(/* webpackPrefetch: true */ '~/components/AppFooter.vue'),
   },
@@ -26,8 +37,15 @@ export default defineComponent({
       await loadConfiguration();
     });
 
+    const isMobile = computed(() => mapMobileObserver().isMobile.get());
+
+    onBeforeUnmount(() => {
+      unMapMobileObserver();
+    });
+
     return {
       route,
+      isMobile
     };
   },
 });

@@ -7,7 +7,6 @@
 
 import { computed, useContext } from '@nuxtjs/composition-api';
 import cookieNames from '~/_old/enums/cookieNameEnum';
-//import { useConfig, useStore, useCurrency } from '~/_old/composables/index';
 import useConfig from '~/composables/useConfig';
 
 // type UseMagentoConfiguration = () => {
@@ -29,16 +28,6 @@ export const useMagentoConfiguration = () => {
     load: loadConfig,
   } = useConfig();
 
-  // const {
-  //   stores,
-  //   load: loadStores,
-  // } = useStore();
-  //
-  // const {
-  //   currency,
-  //   load: loadCurrencies,
-  // } = useCurrency();
-
   const selectedCurrency = computed<string | undefined>(() => app.$cookies.get(cookieNames.currencyCookieName));
   const selectedLocale = computed<string | undefined>(() => app.$cookies.get(cookieNames.localeCookieName));
   const selectedStore = computed<string | undefined>(() => app.$cookies.get(cookieNames.storeCookieName));
@@ -51,9 +40,6 @@ export const useMagentoConfiguration = () => {
       updateCookies,
       updateLocale,
     } = params;
-
-    // await loadStores();
-    // await loadCurrencies();
 
     // eslint-disable-next-line promise/catch-or-return
     await loadConfig().then(() => {
@@ -87,8 +73,6 @@ export const useMagentoConfiguration = () => {
   };
 
   return {
-    // currency,
-    // stores,
     storeConfig,
     selectedCurrency,
     selectedLocale,
