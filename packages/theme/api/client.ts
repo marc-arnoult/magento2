@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 
-const endpoint = 'https://magento2-instance.vuestorefront.io/graphql'; // todo: bind from config
+const endpoint = 'https://magento2demo.frodigo.com/graphql'; // todo: bind from config
 
 const graphQLClient = new GraphQLClient(endpoint, {
   headers: {

@@ -7,11 +7,7 @@ export const useApiClient = () => {
   const customerToken = app.$cookies.get(cookieNames.customerCookieName);
   let defaultHeaders = {
     store: app.$cookies.get(cookieNames.storeCookieName),
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-    'Content-Type': `application/json`,
-    'Accept'      : `application/json`,
-    authorization: undefined
+    authorization: undefined,
   };
 
   if (customerToken) {

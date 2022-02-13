@@ -16,7 +16,7 @@ export default defineComponent({
     const { login, user } = useUser();
     useFetch(() => login({
       user: {
-        email: 'bherba+1@vuestorefront.io',
+        email: 'marcin.kwiatkowski@vuestorefront.io',
         password: 'Admin123!',
       },
     }));

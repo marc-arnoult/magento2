@@ -1,9 +1,11 @@
 <template>
   <div>
-    <TopBar
-      v-if="!isMobile"
-      class="desktop-only"
-    />
+    <lazy-hydrate when-visible>
+      <TopBar
+        v-if="!isMobile"
+        class="desktop-only"
+      />
+    </lazy-hydrate>
     <AppHeader />
     <div id="layout">
       <nuxt :key="route.fullPath" />
@@ -12,6 +14,7 @@
   </div>
 </template>
 <script>
+import LazyHydrate from 'vue-lazy-hydration';
 import {
   useRoute, defineComponent, useFetch, computed, onBeforeUnmount
 } from '@nuxtjs/composition-api';
@@ -25,6 +28,7 @@ import AppHeader from '~/components/AppHeader';
 export default defineComponent({
   name: 'DefaultLayout',
   components: {
+    LazyHydrate,
     TopBar: () => import(/* webpackPrefetch: true */ '~/components/TopBar.vue'),
     AppHeader,
     AppFooter: () => import(/* webpackPrefetch: true */ '~/components/AppFooter.vue'),

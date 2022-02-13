@@ -68,7 +68,7 @@ import {
 import {
   ref,
   defineComponent,
-  useAsync,
+  onMounted,
 } from '@nuxtjs/composition-api';
 import storeConfigGetters from '~/getters/storeConfigGetters';
 import storeGetters from '~/getters/storeGetters';
@@ -102,7 +102,7 @@ export default defineComponent({
       isLangModalOpen.value = false;
     };
 
-    useAsync(() => {
+    onMounted(() => {
       load();
     });
 
