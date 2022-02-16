@@ -8,11 +8,15 @@ export const useTopBar = () => {
   const hasStoresToSelect = ref(null);
   const hasCurrencyToSelect = ref(null);
 
-  onMounted(async () => {
-    const data = await query(checkStoresAndCurrencyQuery);
+  onMounted(() => {
+    // eslint-disable-next-line promise/catch-or-return
+    query(checkStoresAndCurrencyQuery)
+      .then((data) => {
+        hasStoresToSelect.value = data?.availableStores?.length;
+        hasCurrencyToSelect.value = data?.currency?.available_currency_codes?.length > 1;
 
-    hasStoresToSelect.value = data?.availableStores?.length;
-    hasCurrencyToSelect.value = data?.currency?.available_currency_codes?.length > 1;
+        return data;
+      });
   });
 
   return {

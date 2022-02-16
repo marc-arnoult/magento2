@@ -19,19 +19,16 @@
         </template>
       </SfCharacteristic>
     </SfButton>
-    <LazyHydrate when-visible>
-      <StoresModal
-        v-if="isLangModalOpen"
-        :store-config="storeConfig"
-        :is-lang-modal-open="isLangModalOpen"
-        @closeModal="isLangModalOpen = false"
-      />
-    </LazyHydrate>
+    <StoresModal
+      v-if="isLangModalOpen"
+      :store-config="storeConfig"
+      :is-lang-modal-open="isLangModalOpen"
+      @closeModal="isLangModalOpen = false"
+    />
   </div>
 </template>
 
 <script>
-import LazyHydrate from 'vue-lazy-hydration';
 import {
   useConfig,
   storeConfigGetters,
@@ -53,7 +50,6 @@ export default defineComponent({
     StoresModal,
     SfButton,
     SfCharacteristic,
-    LazyHydrate,
   },
   setup() {
     const {

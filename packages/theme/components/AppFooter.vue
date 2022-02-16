@@ -62,6 +62,7 @@
           :alt="item"
           width="32"
           height="32"
+          loading="lazy"
         />
       </div>
     </SfFooterColumn>

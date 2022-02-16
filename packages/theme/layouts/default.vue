@@ -1,15 +1,9 @@
 <template>
   <div>
     <CartSidebar v-if="isCartSidebarOpen" />
-    <LazyHydrate when-visible>
-      <WishlistSidebar />
-    </LazyHydrate>
-    <LazyHydrate when-visible>
-      <LoginModal />
-    </LazyHydrate>
-    <LazyHydrate when-visible>
-      <Notification />
-    </LazyHydrate>
+    <WishlistSidebar />
+    <LoginModal />
+    <Notification />
     <TopBar class="desktop-only" />
     <AppHeader />
     <div id="layout">
@@ -21,7 +15,6 @@
 </template>
 
 <script>
-import LazyHydrate from 'vue-lazy-hydration';
 import {
   useRoute, defineComponent, onMounted, useAsync,
 } from '@nuxtjs/composition-api';
@@ -39,7 +32,6 @@ export default defineComponent({
   name: 'DefaultLayout',
 
   components: {
-    LazyHydrate,
     AppHeader,
     TopBar,
     BottomNavigation,
