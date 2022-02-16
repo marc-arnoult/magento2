@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: develop
-        run: git checkout -b chore/main-dev-${{ env.RELEASE_VERSION }}
+          run: git checkout -b chore/main-dev-${{ env.RELEASE_VERSION }}
 
       - name: Merge main into develop branch
         uses: thomaseizinger/create-pull-request@1.0.0
