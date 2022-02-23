@@ -23,7 +23,8 @@
 
 <script>
 import { computed, defineComponent } from '@nuxtjs/composition-api';
-import { useConfig, storeConfigGetters } from '@vue-storefront/magento';
+import { storeConfigGetters } from '@vue-storefront/magento';
+import useConfig from '@vue-storefront/magento/lib/composables/useConfig';
 import SvgImage from '~/components/General/SvgImage.vue';
 
 export default defineComponent({
@@ -38,7 +39,7 @@ export default defineComponent({
         const logo = storeConfigGetters.getLogoSrc(config.value);
 
         return baseMediaUrl && logo ? `${baseMediaUrl}logo/${logo}` : ''
-      }
+      },
     );
 
     const logoWidth = computed(
