@@ -19,8 +19,7 @@ import {
   SfHeading,
 } from '@storefront-ui/vue';
 import useContent from '@vue-storefront/magento/lib/composables/useContent';
-import { onSSR } from '@vue-storefront/core';
-import { defineComponent, useContext, useRoute } from '@nuxtjs/composition-api';
+import { defineComponent, useAsync, useContext, useRoute } from '@nuxtjs/composition-api';
 import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 import HTMLContent from '~/components/HTMLContent';
 
@@ -39,21 +38,25 @@ export default defineComponent({
   setup(props) {
     const { addTags } = useCache();
     const {
-      page,
       error,
-      loadContent,
+      loadPage,
       loading,
     } = useContent('cmsPage');
     const route = useRoute();
-    const { error: nuxtError } = useContext();
+    const { error: nuxtError, app } = useContext();
     const { params } = route.value;
 
-    onSSR(async () => {
-      await loadContent({ identifier: params.slug || props.identifier });
+    const vsfContext = app.$vsf;
+
+    const page = useAsync(async () => {
+      const pageContent = await loadPage(vsfContext, { identifier: params.slug || props.identifier });
       if (error?.value?.content) nuxtError({ statusCode: 404 });
 
-      addTags([{ prefix: CacheTagPrefix.View, value: page.value.identifier }]);
+      addTags([{ prefix: CacheTagPrefix.View, value: pageContent.identifier }]);
+
+      return pageContent;
     });
+
     return {
       page,
       loading,

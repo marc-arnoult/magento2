@@ -1,26 +1,58 @@
-import { Context, Logger } from '@vue-storefront/core';
-import { Page, CmsBlock } from '@vue-storefront/magento-api';
-import { useContentFactory, UseContentFactoryParams } from '../../factories/useContentFactory';
+import { ref, Ref } from '@vue/composition-api';
+import { ComposableFunctionArgs, Logger } from '@vue-storefront/core';
+import { UseContentInterface, UseContentErrors } from './useContent';
+import { loadContentCommand } from './commands/loadContentCommand';
+import { loadBlocksCommand } from './commands/loadBlocksCommand';
 
-const factoryParams: UseContentFactoryParams<Page, CmsBlock> = {
-  loadContent: async (context: Context, params) => {
-    Logger.debug('[Magento]: Load CMS Page content', { params });
+export const useContent = <PAGE, BLOCK>(): UseContentInterface<PAGE, BLOCK> => {
+  const loading: Ref<boolean> = ref(false);
+  const error: Ref<UseContentErrors> = ref({
+    page: null,
+    blocks: null,
+  });
 
-    const { data } = await context.$magento.api.cmsPage(params.identifier);
+  const loadPage = async (context: any, params: ComposableFunctionArgs<{ identifier: string }>): Promise<PAGE> => {
+    Logger.debug('useContent/loadPage');
+    loading.value = true;
+    let result = null;
 
-    Logger.debug('[Result]:', { data });
+    try {
+      error.value.page = null;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      result = await loadContentCommand.execute(context, params);
+    } catch (err) {
+      error.value.page = err;
+    } finally {
+      loading.value = false;
+    }
 
-    return data.cmsPage;
-  },
-  loadBlocks: async (context: Context, params) => {
-    Logger.debug('[Magento]: Load CMS Blocks content', { params });
+    return result;
+  };
 
-    const { data } = await context.$magento.api.cmsBlocks(params.identifiers);
+  const loadBlocks = async (context: any, params: ComposableFunctionArgs<{ identifiers: string[] }>): Promise<BLOCK[]> => {
+    Logger.debug('useContent/loadBlocks');
+    loading.value = true;
+    let result = [];
 
-    Logger.debug('[Result]:', { data });
+    try {
+      error.value.blocks = null;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      result = await loadBlocksCommand.execute(context, params);
+    } catch (err) {
+      error.value.blocks = err;
+    } finally {
+      loading.value = false;
+    }
 
-    return data.cmsBlocks.items;
-  },
+    return result;
+  };
+
+  return {
+    loadPage,
+    loadBlocks,
+    loading,
+    error,
+  };
 };
 
-export default useContentFactory<Page, CmsBlock>(factoryParams);
+export default useContent;
