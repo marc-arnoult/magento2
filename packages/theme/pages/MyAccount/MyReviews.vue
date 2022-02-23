@@ -58,7 +58,8 @@ import {
   SfReview,
   SfRating,
 } from '@storefront-ui/vue';
-import { reviewGetters, useReview } from '@vue-storefront/magento';
+import { reviewGetters } from '@vue-storefront/magento';
+import useReview from '@vue-storefront/magento/lib/composables/useReview';
 import { computed, defineComponent, onBeforeMount } from '@nuxtjs/composition-api';
 
 export default defineComponent({

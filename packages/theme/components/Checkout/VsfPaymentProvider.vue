@@ -26,7 +26,7 @@ import {
   computed,
   defineComponent,
 } from '@nuxtjs/composition-api';
-import { usePaymentProvider } from '@vue-storefront/magento';
+import usePaymentProvider from '@vue-storefront/magento/lib/composables/usePaymentProvider';
 
 export default defineComponent({
   name: 'VsfPaymentProvider',

@@ -20,7 +20,8 @@
 <script>
 import { SfSidebar, SfList, SfMenuItem } from '@storefront-ui/vue';
 import { defineComponent, computed } from '@nuxtjs/composition-api';
-import { categoryGetters, useCategory } from '@vue-storefront/magento';
+import { categoryGetters } from '@vue-storefront/magento';
+import useCategory from '@vue-storefront/magento/lib/composables/useCategory';
 import { useUiHelpers, useUiState } from '~/composables';
 
 export default defineComponent({

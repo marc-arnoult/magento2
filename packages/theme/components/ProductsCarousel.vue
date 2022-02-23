@@ -107,8 +107,10 @@ import {
 } from '@storefront-ui/vue';
 
 import {
-  productGetters, useUser, useWishlist,
+  productGetters,
 } from '@vue-storefront/magento';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
+import useWishlist from '@vue-storefront/magento/lib/composables/useWishlist';
 import { computed, defineComponent } from '@nuxtjs/composition-api';
 import { useAddToCart } from '~/helpers/cart/addToCart';
 import { useImage } from '~/composables';

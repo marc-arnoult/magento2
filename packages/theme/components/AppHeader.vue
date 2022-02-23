@@ -123,10 +123,11 @@ import {
 
 import {
   categoryGetters,
-  useCart,
-  useCategory,
-  useUser, useWishlist,
 } from '@vue-storefront/magento';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
+import useCategory from '@vue-storefront/magento/lib/composables/useCategory';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
+import useWishlist from '@vue-storefront/magento/lib/composables/useWishlist';
 import {
   computed,
   ref,

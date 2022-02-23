@@ -81,7 +81,8 @@ import {
   SfRadio,
   SfButton,
 } from '@storefront-ui/vue';
-import { productGetters, useCart } from '@vue-storefront/magento';
+import { productGetters } from '@vue-storefront/magento';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
 import {
   computed,
   defineComponent,

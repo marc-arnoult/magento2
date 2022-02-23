@@ -33,10 +33,10 @@
 <script>
 import LazyHydrate from 'vue-lazy-hydration';
 import {
-  useConfig,
   storeConfigGetters,
   storeGetters,
 } from '@vue-storefront/magento';
+import useConfig from '@vue-storefront/magento/lib/composables/useConfig';
 import {
   SfButton,
   SfCharacteristic,

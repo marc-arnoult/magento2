@@ -271,11 +271,11 @@ import {
   useContext,
 } from '@nuxtjs/composition-api';
 import {
-  useCart,
-  useWishlist,
   productGetters,
   wishlistGetters,
 } from '@vue-storefront/magento';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
+import useWishlist from '@vue-storefront/magento/lib/composables/useWishlist';
 import { useUiHelpers, useUiState, useImage } from '~/composables';
 import SvgImage from '~/components/General/SvgImage.vue';
 

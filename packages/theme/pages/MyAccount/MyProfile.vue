@@ -37,7 +37,7 @@ import {
 } from 'vee-validate/dist/rules';
 import { SfTabs } from '@storefront-ui/vue';
 import { onSSR } from '@vue-storefront/core';
-import { useUser } from '@vue-storefront/magento';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
 import { defineComponent } from '@nuxtjs/composition-api';
 import ProfileUpdateForm from '~/components/MyAccount/ProfileUpdateForm.vue';
 import PasswordResetForm from '~/components/MyAccount/PasswordResetForm.vue';

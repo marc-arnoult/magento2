@@ -255,12 +255,12 @@ import {
 } from '@nuxtjs/composition-api';
 import {
   addressGetter,
-  useCountrySearch,
   userShippingGetters,
-  useShipping,
-  useUser,
-  useUserShipping,
 } from '@vue-storefront/magento';
+import useCountrySearch from '@vue-storefront/magento/lib/composables/useCountrySearch';
+import useShipping from '@vue-storefront/magento/lib/composables/useShipping';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
+import useUserShipping from '@vue-storefront/magento/lib/composables/useUserShipping';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { addressFromApiToForm } from '~/helpers/checkout/address';

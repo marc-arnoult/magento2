@@ -54,7 +54,8 @@ import {
   useRoute,
   useRouter,
 } from '@nuxtjs/composition-api';
-import { useCart, useUser } from '@vue-storefront/magento';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
 import {
   mapMobileObserver,
   unMapMobileObserver,

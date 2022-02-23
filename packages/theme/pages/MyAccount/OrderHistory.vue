@@ -180,7 +180,8 @@ import {
 import {
   computed, defineComponent, ref, useRoute,
 } from '@nuxtjs/composition-api';
-import { useUserOrder, orderGetters } from '@vue-storefront/magento';
+import { orderGetters } from '@vue-storefront/magento';
+import useUserOrder from '@vue-storefront/magento/lib/composables/useUserOrder';
 import { AgnosticOrderStatus, onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
 import { useUiHelpers } from '~/composables';

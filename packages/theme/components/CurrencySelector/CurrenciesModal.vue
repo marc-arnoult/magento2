@@ -39,9 +39,7 @@ import {
   SfBottomModal,
   SfCharacteristic,
 } from '@storefront-ui/vue';
-import {
-  useCurrency,
-} from '@vue-storefront/magento';
+import useCurrency from '@vue-storefront/magento/lib/composables/useCurrency';
 import { useHandleChanges } from '~/helpers/magentoConfig/handleChanges';
 
 export default defineComponent({

@@ -1,5 +1,6 @@
 import { computed, useRoute } from '@nuxtjs/composition-api';
-import { productGetters, useProduct } from '@vue-storefront/magento';
+import { productGetters } from '@vue-storefront/magento';
+import useProduct from '@vue-storefront/magento/lib/composables/useProduct';
 
 export const productData = () => {
   const route = useRoute();

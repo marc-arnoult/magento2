@@ -121,8 +121,10 @@ import {
   useContext,
 } from '@nuxtjs/composition-api';
 import {
-  reviewGetters, useReview, userGetters, useUser,
+  reviewGetters, userGetters,
 } from '@vue-storefront/magento';
+import useReview from '@vue-storefront/magento/lib/composables/useReview';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
 import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
 import { min, oneOf, required } from 'vee-validate/dist/rules';
 import {

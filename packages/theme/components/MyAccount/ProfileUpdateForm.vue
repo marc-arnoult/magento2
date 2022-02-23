@@ -84,7 +84,8 @@
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api';
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import { useUser, userGetters } from '@vue-storefront/magento';
+import { userGetters } from '@vue-storefront/magento';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
 import {
   SfInput,
   SfButton,

@@ -83,8 +83,13 @@
   </transition>
 </template>
 <script>
-import { SfTabs, SfButton } from '@storefront-ui/vue';
-import { userAddressesGetters, useAddresses } from '@vue-storefront/magento';
+import {
+  SfTabs,
+  SfButton,
+  SfIcon,
+} from '@storefront-ui/vue';
+import { userAddressesGetters } from '@vue-storefront/magento';
+import useAddresses from '@vue-storefront/magento/lib/composables/useAddresses'
 import {
   computed, defineComponent, useRouter, useRoute, useContext,
 } from '@nuxtjs/composition-api';

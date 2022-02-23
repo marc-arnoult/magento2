@@ -175,10 +175,10 @@ import {
   useContext, onMounted,
 } from '@nuxtjs/composition-api';
 import {
-  useMakeOrder,
-  useCart,
   cartGetters,
 } from '@vue-storefront/magento';
+import useMakeOrder from '@vue-storefront/magento/lib/composables/useMakeOrder';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
 import getShippingMethodPrice from '~/helpers/checkout/getShippingMethodPrice';
 import { useImage } from '~/composables';
 import { removeItem } from '~/helpers/asyncLocalStorage';

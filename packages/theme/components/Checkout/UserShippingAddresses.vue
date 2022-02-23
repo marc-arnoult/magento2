@@ -34,9 +34,9 @@ import {
   SfAddressPicker,
 } from '@storefront-ui/vue';
 import {
-  useUserShipping,
   userShippingGetters,
 } from '@vue-storefront/magento';
+import useUserShipping from '@vue-storefront/magento/lib/composables/useUserShipping';
 import {
   computed,
   defineComponent,

@@ -94,8 +94,8 @@ import {
 } from '@nuxtjs/composition-api';
 import {
   categoryGetters,
-  useCategory,
 } from '@vue-storefront/magento';
+import useCategory from '@vue-storefront/magento/lib/composables/useCategory';
 import { onSSR } from '@vue-storefront/core';
 import { useUrlResolver } from '~/composables/useUrlResolver.ts';
 import { useUiHelpers } from '~/composables';

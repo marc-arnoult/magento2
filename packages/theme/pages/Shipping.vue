@@ -199,7 +199,9 @@ import {
   defineComponent,
 } from '@nuxtjs/composition-api';
 import { onSSR } from '@vue-storefront/core';
-import { useShipping, useCountrySearch, addressGetter } from '@vue-storefront/magento';
+import { addressGetter } from '@vue-storefront/magento';
+import useShipping from '@vue-storefront/magento/lib/composables/useShipping';
+import useCountrySearch from '@vue-storefront/magento/lib/composables/useCountrySearch';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 

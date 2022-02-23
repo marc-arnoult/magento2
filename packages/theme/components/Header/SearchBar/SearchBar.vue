@@ -57,9 +57,9 @@ import SvgImage from '~/components/General/SvgImage.vue';
 import debounce from 'lodash.debounce';
 import {
   categoryGetters,
-  useCategorySearch,
-  useFacet,
 } from '@vue-storefront/magento';
+import useCategorySearch from '@vue-storefront/magento/lib/composables/useCategorySearch';
+import useFacet from '@vue-storefront/magento/lib/composables/useFacet';
 
 export default defineComponent({
   name: 'SearchBar',

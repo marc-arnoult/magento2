@@ -195,9 +195,9 @@ import {
 } from '@storefront-ui/vue';
 import {
   addressGetter,
-  useAddresses,
-  useCountrySearch,
 } from '@vue-storefront/magento';
+import useCountrySearch from '@vue-storefront/magento/lib/composables/useCountrySearch';
+import useAddresses from '@vue-storefront/magento/lib/composables/useAddresses';
 import { required, min, oneOf } from 'vee-validate/dist/rules';
 import {
   ValidationProvider,

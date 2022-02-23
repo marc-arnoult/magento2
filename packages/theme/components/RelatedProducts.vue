@@ -7,7 +7,7 @@
 </template>
 <script>
 import { defineComponent } from '@nuxtjs/composition-api';
-import { useRelatedProducts } from '@vue-storefront/magento';
+import useRelatedProducts from '@vue-storefront/magento/lib/composables/useRelatedProducts';
 import { onSSR } from '@vue-storefront/core';
 import ProductsCarousel from '~/components/ProductsCarousel.vue';
 import { productData } from '~/helpers/product/productData';

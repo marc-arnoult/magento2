@@ -31,9 +31,9 @@ import {
   SfAddressPicker,
 } from '@storefront-ui/vue';
 import {
-  useUserBilling,
   userBillingGetters,
 } from '@vue-storefront/magento';
+import useUserBilling from '@vue-storefront/magento/lib/composables/useUserBilling';
 import {
   defineComponent,
 } from '@nuxtjs/composition-api';

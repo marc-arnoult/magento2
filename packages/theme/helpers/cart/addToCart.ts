@@ -1,4 +1,5 @@
-import { Product, productGetters, useCart } from '@vue-storefront/magento';
+import { Product, productGetters } from '@vue-storefront/magento';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
 import { useRouter, useContext } from '@nuxtjs/composition-api';
 
 export const useAddToCart = () => {

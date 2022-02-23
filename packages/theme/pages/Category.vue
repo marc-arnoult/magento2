@@ -441,11 +441,11 @@ import {
   categoryGetters,
   facetGetters,
   productGetters,
-  useCategory,
-  useFacet,
-  useUser,
-  useWishlist,
 } from '@vue-storefront/magento';
+import useCategory from '@vue-storefront/magento/lib/composables/useCategory';
+import useFacet from '@vue-storefront/magento/lib/composables/useFacet';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
+import useWishlist from '@vue-storefront/magento/lib/composables/useWishlist';
 import { onSSR, useVSFContext } from '@vue-storefront/core';
 import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 import { useUrlResolver } from '~/composables/useUrlResolver.ts';

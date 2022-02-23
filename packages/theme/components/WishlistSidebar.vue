@@ -156,11 +156,11 @@ import {
 } from '@storefront-ui/vue';
 import { computed, defineComponent, onMounted } from '@nuxtjs/composition-api';
 import {
-  useWishlist,
-  useUser,
   wishlistGetters,
   productGetters,
 } from '@vue-storefront/magento';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
+import useWishlist from '@vue-storefront/magento/lib/composables/useWishlist';
 import { useUiState, useImage } from '~/composables';
 import SvgImage from '~/components/General/SvgImage.vue';
 

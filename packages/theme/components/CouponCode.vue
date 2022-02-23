@@ -27,7 +27,8 @@
 
 <script>
 import { SfButton, SfInput } from '@storefront-ui/vue';
-import { useCart, cartGetters } from '@vue-storefront/magento';
+import { cartGetters } from '@vue-storefront/magento';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
 import {
   computed,
   onMounted,

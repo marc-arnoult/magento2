@@ -298,9 +298,9 @@ import {
 } from '@storefront-ui/vue';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, email } from 'vee-validate/dist/rules';
-import {
-  useUser, useForgotPassword, useWishlist, useCart,
-} from '@vue-storefront/magento';
+import useForgotPassword from '@vue-storefront/magento/lib/composables/useForgotPassword';
+import useWishlist from '@vue-storefront/magento/lib/composables/useWishlist';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
 import { useUiState } from '~/composables';
 import { customerPasswordRegExp, invalidPasswordMsg } from '~/helpers/customer/regex';
 

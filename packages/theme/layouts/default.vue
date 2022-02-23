@@ -24,9 +24,7 @@ import LazyHydrate from 'vue-lazy-hydration';
 import {
   useRoute, defineComponent, onMounted, useAsync,
 } from '@nuxtjs/composition-api';
-import {
-  useUser,
-} from '@vue-storefront/magento';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
 import useUiState from '~/composables/useUiState.ts';
 import LoadWhenVisible from '~/components/utils/LoadWhenVisible';
 import { useMagentoConfiguration } from '~/composables/useMagentoConfiguration';

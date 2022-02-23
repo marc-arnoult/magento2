@@ -1,6 +1,4 @@
-import {
-  useUrlResolver as urlResolver,
-} from '@vue-storefront/magento';
+import urlResolver from '@vue-storefront/magento/lib/composables/useUrlResolver';
 import { useRoute, useContext } from '@nuxtjs/composition-api';
 
 export const useUrlResolver = () => {

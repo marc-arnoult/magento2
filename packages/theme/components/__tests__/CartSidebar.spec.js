@@ -1,8 +1,6 @@
 import userEvent from '@testing-library/user-event';
-import {
-  useCart,
-  useUser,
-} from '@vue-storefront/magento';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
 
 import { useUiState } from '~/composables';
 import {

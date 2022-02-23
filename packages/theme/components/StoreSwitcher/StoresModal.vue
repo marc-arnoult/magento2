@@ -52,10 +52,10 @@ import {
   SfCharacteristic,
 } from '@storefront-ui/vue';
 import {
-  useStore,
   storeConfigGetters,
   storeGetters,
 } from '@vue-storefront/magento';
+import useStore from '@vue-storefront/magento/lib/composables/useStore';
 import { useHandleChanges } from '~/helpers/magentoConfig/handleChanges';
 
 export default defineComponent({

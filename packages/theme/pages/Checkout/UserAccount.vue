@@ -142,7 +142,8 @@ import {
   useRouter,
   useContext, onMounted,
 } from '@nuxtjs/composition-api';
-import { useUser, useGuestUser } from '@vue-storefront/magento';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
+import useGuestUser from '@vue-storefront/magento/lib/composables/useGuestUser';
 import {
   required, min, email,
 } from 'vee-validate/dist/rules';

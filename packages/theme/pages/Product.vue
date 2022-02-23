@@ -268,14 +268,14 @@ import {
   SfTabs,
 } from '@storefront-ui/vue';
 import {
-  useProduct,
-  useCart,
   productGetters,
-  useReview,
   reviewGetters,
-  useUser,
-  useWishlist,
 } from '@vue-storefront/magento';
+import useReview from '@vue-storefront/magento/lib/composables/useReview';
+import useProduct from '@vue-storefront/magento/lib/composables/useProduct';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
+import useWishlist from '@vue-storefront/magento/lib/composables/useWishlist';
 import { onSSR } from '@vue-storefront/core';
 import {
   ref,

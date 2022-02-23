@@ -94,9 +94,9 @@ import {
   SfBannerGrid,
 } from '@storefront-ui/vue';
 import {
-  useProduct,
   productGetters,
 } from '@vue-storefront/magento';
+import useProduct from '@vue-storefront/magento/lib/composables/useProduct';
 import {
   computed,
   defineComponent,

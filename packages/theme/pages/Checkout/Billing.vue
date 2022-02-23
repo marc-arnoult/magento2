@@ -270,14 +270,14 @@ import {
   SfCheckbox,
 } from '@storefront-ui/vue';
 import {
-  useUserBilling,
   userBillingGetters,
-  useUser,
-  useBilling,
-  useShipping,
-  useCountrySearch,
   addressGetter,
 } from '@vue-storefront/magento';
+import useUserBilling from '@vue-storefront/magento/lib/composables/useUserBilling';
+import useUser from '@vue-storefront/magento/lib/composables/useUser';
+import useBilling from '@vue-storefront/magento/lib/composables/useBilling';
+import useShipping from '@vue-storefront/magento/lib/composables/useShipping';
+import useCountrySearch from '@vue-storefront/magento/lib/composables/useCountrySearch';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import {

@@ -83,11 +83,11 @@
 
 <script>
 import {
-  useCart,
-  useShippingProvider,
   cartGetters,
-  useGetShippingMethods,
 } from '@vue-storefront/magento';
+import useCart from '@vue-storefront/magento/lib/composables/useCart';
+import useShippingProvider from '@vue-storefront/magento/lib/composables/useShippingProvider';
+import useGetShippingMethods from '@vue-storefront/magento/lib/composables/useGetShippingMethods';
 import {
   SfHeading, SfButton, SfRadio, SfLoader,
 } from '@storefront-ui/vue';
