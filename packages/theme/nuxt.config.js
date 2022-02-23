@@ -228,6 +228,7 @@ export default () => {
       '~/serverMiddleware/body-parser.js',
     ],
     router: {
+      prefetchLinks: false,
       extendRoutes(routes) {
         getRoutes()
           .forEach((route) => routes.unshift(route));
