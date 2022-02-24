@@ -120,13 +120,11 @@ import {
   SfButton,
   SfBadge,
 } from '@storefront-ui/vue';
-
 import {
   categoryGetters,
 } from '@vue-storefront/magento';
 import useCart from '@vue-storefront/magento/lib/composables/useCart';
 import useCategory from '@vue-storefront/magento/lib/composables/useCategory';
-import useUser from '@vue-storefront/magento/lib/composables/useUser';
 import useWishlist from '@vue-storefront/magento/lib/composables/useWishlist';
 import {
   computed,
@@ -134,8 +132,9 @@ import {
   defineComponent,
   useRouter,
   useContext,
-  useFetch,
+  onMounted,
 } from '@nuxtjs/composition-api';
+import { customerCookieName } from '../enums/cookieNameEnum';
 import HeaderNavigationItem from '~/components/Navigation/HeaderNavigationItem.vue';
 import {
   useUiHelpers,
@@ -165,24 +164,15 @@ export default defineComponent({
     const { app } = useContext();
     const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } = useUiState();
     const { setTermForUrl, getAgnosticCatLink } = useUiHelpers();
-    const { isAuthenticated } = useUser();
-    const { totalQuantity: cartTotalItems, loadTotalQty: loadCartTotalQty } = useCart();
-    const { itemsCount: wishlistItemsQty, loadItemsCount: loadWishlistItemsCount } = useWishlist('GlobalWishlist');
-
-    const {
-      categories: categoryList,
-      search: categoriesListSearch,
-    } = useCategory('AppHeader:CategoryList');
-
     const isSearchOpen = ref(false);
     const result = ref(null);
-
-    const wishlistHasProducts = computed(() => wishlistItemsQty.value > 0);
-
-    const accountIcon = computed(() => (isAuthenticated.value ? 'profile_fill' : 'profile'));
-
+    const isAuthenticated = app.$cookies.get(customerCookieName);
+    const accountIcon = computed(() => (isAuthenticated ? 'profile_fill' : 'profile'));
+    const cartTotalItems = ref(null);
+    const wishlistItemsQty = ref(0);
+    const wishlistHasProducts = ref(wishlistItemsQty.value > 0);
+    const categoryList = ref([]);
     const categoryTree = computed(() => categoryGetters.getCategoryTree(categoryList.value?.[0])?.items.filter((c) => c.count > 0));
-
     const handleAccountClick = async () => {
       if (isAuthenticated.value) {
         await router.push(`${app.localePath('/my-account')}`);
@@ -191,9 +181,37 @@ export default defineComponent({
       }
     };
 
-    useFetch(async () => {
+    onMounted(() => {
       if (app.$device.isDesktop) {
-        await Promise.all([loadCartTotalQty(), loadWishlistItemsCount(), categoriesListSearch({ pageSize: 20 })]);
+        const { totalQuantity, loadTotalQty } = useCart();
+
+        loadTotalQty()
+          .then(() => {
+            cartTotalItems.value = totalQuantity.value;
+
+            return cartTotalItems.value;
+          });
+
+        const { itemsCount, loadItemsCount: loadWishlistItemsCount } = useWishlist('GlobalWishlist');
+
+        loadWishlistItemsCount()
+          .then(() => {
+            wishlistItemsQty.value = itemsCount.value;
+
+            return itemsCount.value;
+          });
+
+        const {
+          categories,
+          search: categoriesListSearch,
+        } = useCategory('AppHeader:CategoryList');
+
+        categoriesListSearch({ pageSize: 20 })
+          .then(() => {
+            categoryList.value = categories.value;
+
+            return categories.value;
+          });
       }
     });
 
