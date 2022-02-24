@@ -201,6 +201,40 @@ export default () => {
         plugins: [
           ['@babel/plugin-proposal-private-methods', { loose: true }],
         ],
+        // presets({ envName }) {
+        //   const envTargets = {
+        //     client: { browsers: ['> 0.25%, not dead'] },
+        //     server: { node: '16.13.2' },
+        //   };
+        //   return [
+        //     [
+        //       '@nuxt/babel-preset-app',
+        //       {
+        //         targets: envTargets[envName],
+        //       },
+        //     ],
+        //   ];
+        // },
+      },
+      extractCSS: true,
+      optimization: {
+        splitChunks: {
+          cacheGroups: {
+            styles: {
+              name: 'styles',
+              test: /\.(css|vue)$/,
+              chunks: 'all',
+              enforce: true,
+            },
+          },
+        },
+      },
+      optimizeCSS: true,
+      parallel: true,
+      splitChunks: {
+        layouts: true,
+        pages: true,
+        commons: true,
       },
       transpile: [
         'vee-validate/dist/rules',
@@ -214,9 +248,6 @@ export default () => {
           }),
         }),
       ],
-      extractCSS: {
-        allChunks: true,
-      },
     },
     plugins: [
       '~/plugins/token-expired',
