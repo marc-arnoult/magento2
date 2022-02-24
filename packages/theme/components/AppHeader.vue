@@ -124,7 +124,6 @@ import {
   categoryGetters,
 } from '@vue-storefront/magento';
 import useCart from '@vue-storefront/magento/lib/composables/useCart';
-import useCategory from '@vue-storefront/magento/lib/composables/useCategory';
 import useWishlist from '@vue-storefront/magento/lib/composables/useWishlist';
 import {
   computed,
@@ -162,6 +161,7 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const { app } = useContext();
+    const vsfContext = app.context.$vsf;
     const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } = useUiState();
     const { setTermForUrl, getAgnosticCatLink } = useUiHelpers();
     const isSearchOpen = ref(false);
@@ -181,7 +181,7 @@ export default defineComponent({
       }
     };
 
-    onMounted(() => {
+    onMounted(async () => {
       if (app.$device.isDesktop) {
         const { totalQuantity, loadTotalQty } = useCart();
 
@@ -201,12 +201,14 @@ export default defineComponent({
             return itemsCount.value;
           });
 
+        const { default: useCategory } = await import('@vue-storefront/magento/lib/composables/useCategory');
+
         const {
           categories,
           search: categoriesListSearch,
-        } = useCategory('AppHeader:CategoryList');
+        } = useCategory();
 
-        categoriesListSearch({ pageSize: 20 })
+        categoriesListSearch(vsfContext, { pageSize: 20 })
           .then(() => {
             categoryList.value = categories.value;
 

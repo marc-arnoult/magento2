@@ -1,22 +1,40 @@
-import {
-  useCategoryFactory,
-  Context,
-  UseCategoryFactoryParams, Logger,
-} from '@vue-storefront/core';
-import {
-  Category, CategoryListQueryVariables,
-} from '@vue-storefront/magento-api';
+import { Ref, ref } from '@vue/composition-api';
+import { ComposableFunctionArgs, Context, Logger} from '@vue-storefront/core';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Category } from '@vue-storefront/magento-api';
+import { UseCategory, UseCategoryErrors, CategoryListQueryVariables } from './useCategory';
 
-const factoryParams: UseCategoryFactoryParams<Category, CategoryListQueryVariables> = {
-  categorySearch: async (context: Context, params) => {
-    Logger.debug('[Magento]: List available categories', { params });
+export const useCategory = (): UseCategory => {
+  const loading: Ref<boolean> = ref(false);
+  const error: Ref<UseCategoryErrors> = ref({
+    search: null,
+  });
+  const categories: Ref<Array<Category>> = ref(null);
 
-    const { data } = await context.$magento.api.categoryList(params);
+  // eslint-disable-next-line consistent-return
+  const search = async (context: Context, searchParams: CategoryListQueryVariables) => {
+    Logger.debug('useCategory/search', searchParams);
 
-    Logger.debug('[Result]:', { data });
+    try {
+      loading.value = true;
+      const { data } = await context.$magento.api.categoryList(searchParams);
+      Logger.debug('[Result]:', { data });
+      categories.value = data.categories.items;
+      error.value.search = null;
+    } catch (err) {
+      error.value.search = err;
+      Logger.error('useCategory/search', err);
+    } finally {
+      loading.value = false;
+    }
+  };
 
-    return data.categories.items;
-  },
+  return {
+    search,
+    loading,
+    error,
+    categories,
+  };
 };
 
-export default useCategoryFactory<Category, CategoryListQueryVariables>(factoryParams);
+export default useCategory;

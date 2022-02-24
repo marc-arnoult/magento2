@@ -91,6 +91,7 @@ import {
   computed,
   defineComponent,
   ref,
+  useContext,
 } from '@nuxtjs/composition-api';
 import {
   categoryGetters,
@@ -113,6 +114,8 @@ export default defineComponent({
     noFetch: Boolean,
   },
   setup(props) {
+    const { app } = useContext();
+    const vsfContext = app.context.$vsf;
     const th = useUiHelpers();
     const {
       path,
@@ -123,7 +126,7 @@ export default defineComponent({
       categories,
       search,
       loading,
-    } = useCategory(`categoryList:${path}`);
+    } = useCategory();
 
     const categoryTree = computed(() => categoryGetters.getCategoryTree(
       categories.value?.[0],
@@ -155,7 +158,7 @@ export default defineComponent({
       }
 
       if (!props.noFetch) {
-        await search({
+        await search(vsfContext, {
           pageSize: 20,
         });
       }

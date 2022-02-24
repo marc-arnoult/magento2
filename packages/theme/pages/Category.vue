@@ -435,7 +435,7 @@ import {
 import {
   ref,
   computed,
-  defineComponent,
+  defineComponent, useContext,
 } from '@nuxtjs/composition-api';
 import {
   categoryGetters,
@@ -484,6 +484,8 @@ export default defineComponent({
   }),
   transition: 'fade',
   setup() {
+    const { app } = useContext();
+    const vsfContext = app.context.$vsf;
     const { addTags } = useCache();
     const uiHelpers = useUiHelpers();
     const uiState = useUiState();
@@ -508,7 +510,7 @@ export default defineComponent({
     const {
       categories,
       search: categoriesSearch,
-    } = useCategory(`categoryList:${path}`);
+    } = useCategory();
     const {
       addItemToCart,
       isInCart,
@@ -649,7 +651,7 @@ export default defineComponent({
       isCategoriesLoading.value = true;
       await resolveUrl();
 
-      await categoriesSearch({
+      await categoriesSearch(vsfContext, {
         pageSize: 20,
       });
       isCategoriesLoading.value = false;
