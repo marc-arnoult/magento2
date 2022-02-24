@@ -22,9 +22,9 @@
 <script>
 import LazyHydrate from 'vue-lazy-hydration';
 import {
-  useRoute, defineComponent, onMounted, useAsync,
+  useRoute, defineComponent, useAsync,
 } from '@nuxtjs/composition-api';
-import useUser from '@vue-storefront/magento/lib/composables/useUser';
+//import useUser from '@vue-storefront/magento/lib/composables/useUser';
 import useUiState from '~/composables/useUiState.ts';
 import LoadWhenVisible from '~/components/utils/LoadWhenVisible';
 import { useMagentoConfiguration } from '~/composables/useMagentoConfiguration';
@@ -52,7 +52,7 @@ export default defineComponent({
 
   setup() {
     const route = useRoute();
-    const { load: loadUser } = useUser();
+    //const { load: loadUser } = useUser();
     const { loadConfiguration } = useMagentoConfiguration();
     const { isCartSidebarOpen, isWishlistSidebarOpen, isLoginModalOpen } = useUiState();
 
@@ -60,9 +60,9 @@ export default defineComponent({
       loadConfiguration();
     });
 
-    onMounted(() => {
-      loadUser();
-    });
+    // onMounted(() => {
+    //   loadUser();
+    // });
 
     return {
       isCartSidebarOpen,
