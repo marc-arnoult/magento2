@@ -12,6 +12,9 @@ import {
 } from '@vue-storefront/magento-api';
 import { useReviewFactory, UseReviewFactoryParams } from '../../factories/useReviewFactory';
 
+/**
+ * @deprecated since version 1.0.0
+ */
 const factoryParams: UseReviewFactoryParams<any,
 ComposableFunctionArgs<GetProductSearchParams>,
 ComposableFunctionArgs<CustomerProductReviewParams>,
